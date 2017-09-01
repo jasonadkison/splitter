@@ -1,0 +1,27 @@
+{
+  "name": "splitter",
+  "version": "1.0.0",
+  "description": "",
+  "main": "truffle.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jasonadkison/splitter.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jasonadkison/splitter/issues"
+  },
+  "homepage": "https://github.com/jasonadkison/splitter#readme",
+  "devDependencies": {
+    "ethereumjs-testrpc": "^4.1.1",
+    "mocha": "^3.5.0",
+    "truffle": "^3.4.9"
+  }
+}
