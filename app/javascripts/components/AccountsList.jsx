@@ -1,17 +1,27 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { fetchAccounts } from '../actions.js';
 
-export default class AccountsList extends Component {
-  listAccounts() {
-    return <li>Item 1</li>;
+class AccountsList extends Component {
+  componentDidMount() {
+    this.props.dispatch(fetchAccounts());
   }
   render() {
     return (
       <div id="accounts-list">
         <h2>Accounts</h2>
         <ul>
-          {this.listAccounts()}
+          {this.props.accounts.map(account => (
+            <li key={account}>{account}</li>
+          ))}
         </ul>
       </div>
     );
   }
 }
+
+export default connect(state => {
+  return {
+    accounts: state.accounts,
+  };
+})(AccountsList);
