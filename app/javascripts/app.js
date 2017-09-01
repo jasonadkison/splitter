@@ -2,6 +2,9 @@ import Web3 from 'web3';
 import Promise from 'bluebird';
 import contract from 'truffle-contract';
 import splitter_artifacts from '../../build/contracts/Splitter.json';
+import React from 'react';
+import ReactDOM from 'react-dom';
+import App from './components/App.jsx';
 
 // Assume we're running a local node. Metamask is buggy or we'd prefer it here instead.
 // This app is for learning purposes anyways.
@@ -15,6 +18,7 @@ Promise.promisifyAll(web3.version, { suffix: 'Promise' });
 const Splitter = contract(splitter_artifacts);
 Splitter.setProvider(web3.currentProvider);
 
+/*
 window.addEventListener('load', () => {
   web3.eth.getAccountsPromise().then(accs => {
     console.log('accounts', accs);
@@ -29,3 +33,6 @@ window.addEventListener('load', () => {
     });
 
 });
+*/
+
+ReactDOM.render(<App />, document.getElementById('app'));
