@@ -12,12 +12,13 @@ export const watchContributions = () => {
           if (err) {
             console.error('log error', err);
           } else {
-            return dispatch({
+            dispatch({
               type: 'RECEIVE_CONTRIBUTION_LOG',
               from: log.args.from,
               amount: log.args.amount.toString(10),
               txn: log.transactionHash,
             });
+            dispatch(fetchStats());
           }
         }));
     }
