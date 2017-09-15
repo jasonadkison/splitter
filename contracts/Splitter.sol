@@ -3,30 +3,29 @@ pragma solidity ^0.4.6;
 contract Splitter {
     address public owner;
     address public bob;
-    address public charlie;
-    
-    uint public totalBalance;
-    
+    address public carol;
+
     mapping(address => uint) public balances;
-    
-    function Splitter(address _bob, address _charlie) {
+
+    event LogContribution(address from, uint amount);
+
+    function Splitter(address _bob, address _carol) {
         owner = msg.sender;
         bob = _bob;
-        charlie = _charlie;
+        carol = _carol;
     }
-    
-    function split() payable returns(bool) {
-        require(msg.sender == owner);
-        require(msg.value > 0);
-        
-        totalBalance += msg.value;
-        
-        uint splitAmount = msg.value / 2;
-        
-        balances[bob] += splitAmount;
-        balances[charlie] += splitAmount;
 
-        return true;
+    function() payable {
+        require(msg.value > 0);
+
+        if (msg.sender == owner) {
+            uint splitAmount = msg.value / 2;
+
+            balances[bob] += splitAmount;
+            balances[carol] += splitAmount;
+        }
+
+        LogContribution(msg.sender, msg.value);
     }
 
 }
