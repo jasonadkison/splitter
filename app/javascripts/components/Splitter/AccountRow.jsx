@@ -18,7 +18,7 @@ class AccountRow extends Component {
     if (parseInt(e.target.value, 10) === 0 && e.target.value !== '') return;
     this.setState({ contribution: e.target.value });
   }
-  onSubmitContribution = e => {
+  onClickContribute = e => {
     e.preventDefault();
     this.props.dispatch(sendContribution(this.props.address, this.state.contribution))
       .then(() => {
@@ -34,17 +34,17 @@ class AccountRow extends Component {
           {this.props.alice === this.props.address ? <span className="label label-success">Alice</span> : null}
         </td>
         <td>
-          <form onSubmit={this.onSubmitContribution}>
-            <input
-              type="number"
-              required
-              min={1}
-              value={this.state.contribution}
-              onChange={this.onChangeContribution}
-              placeholder="wei"
-            />
-            <input type="submit" value="Contribute" />
-          </form>
+          <input
+            type="number"
+            required
+            min={1}
+            value={this.state.contribution}
+            onChange={this.onChangeContribution}
+            placeholder="wei"
+          />
+        </td>
+        <td>
+          <input type="submit" value="Contribute" onClick={this.onClickContribute} />
         </td>
       </tr>
     );
