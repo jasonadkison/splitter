@@ -14,7 +14,7 @@ class Splitter extends Component {
     return (
       <div>
         <Stats {...this.props.stats} />
-        <LogsTable items={this.props.logs} />
+        <LogsTable />
         <AccountsTable />
       </div>
     );
@@ -27,5 +27,4 @@ Splitter.propTypes = {
 
 export default connect(state => ({
   stats: state.stats,
-  logs: state.logs,
 }))(Splitter);

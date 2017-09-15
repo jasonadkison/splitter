@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
-export default class LogsTable extends Component {
+class LogsTable extends Component {
   render() {
     return (
       <div>
@@ -15,7 +16,10 @@ export default class LogsTable extends Component {
           <tbody>
             {this.props.items.map(item => (
               <tr key={item.txn}>
-                <td>{item.from}</td>
+                <td>
+                  {item.from}&nbsp;
+                  {this.props.alice === item.from ? <span className="label label-success">Alice</span> : null}
+                </td>
                 <td>{item.amount}</td>
               </tr>
             ))}
@@ -25,3 +29,8 @@ export default class LogsTable extends Component {
     );
   }
 }
+
+export default connect(state => ({
+  items: state.logs,
+  alice: state.stats.alice,
+}))(LogsTable);

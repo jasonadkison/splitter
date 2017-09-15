@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import store from 'store';
+import { connect } from 'react-redux';
 import { sendContribution } from 'actions';
 
-export default class AccountRow extends Component {
+class AccountRow extends Component {
   static propTypes = {
     address: PropTypes.string.isRequired,
   };
@@ -20,16 +20,18 @@ export default class AccountRow extends Component {
   }
   onSubmitContribution = e => {
     e.preventDefault();
-    store.dispatch(sendContribution(this.props.address, this.state.contribution))
+    this.props.dispatch(sendContribution(this.props.address, this.state.contribution))
       .then(() => {
         this.setState({ contribution: '' });
       });
   }
   render() {
+
     return (
       <tr>
         <td>
-          {this.props.address}
+          {this.props.address}<br />
+          {this.props.alice === this.props.address ? <span className="label label-success">Alice</span> : null}
         </td>
         <td>
           <form onSubmit={this.onSubmitContribution}>
@@ -48,3 +50,7 @@ export default class AccountRow extends Component {
     );
   }
 }
+
+export default connect(state => ({
+  alice: state.stats.alice,
+}))(AccountRow);
